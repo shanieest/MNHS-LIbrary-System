@@ -1,0 +1,85 @@
+body { 
+    background-color: #afc7a5; /* Light green background */
+    font-family: Arial, sans-serif; 
+    display: flex; /* Center content */
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+.form-container {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center vertically */
+    justify-content: space-between; /* Space between form and logo */
+    background-color: white; 
+    width: 600px; /* Fixed width for container */
+    padding: 20px; /* Padding around content */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.form {
+    flex: 1; /* Allow form to take remaining space */
+    margin-right: 20px; /* Space between form and logo */
+}
+
+input[type="text"], input[type="date"] { 
+    width: 70%; /* Adjust input width */
+    padding: 8px; /* Slightly larger padding */
+    margin: 5px 0; 
+    border-radius: 5px; 
+    border: 1px solid #009900; 
+}
+
+.button-group {
+    display: flex; /* Flexbox for buttons */
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 10px; /* Space above buttons */
+}
+
+button { 
+    background-color: #009900; 
+    color: white; 
+    padding: 5px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    width: 25%; 
+
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+button:hover { 
+    background-color: #006600; 
+    transform: scale(1.05); 
+}
+
+.back-btn {
+    background-color: #f0f0f0; 
+    color: #333;
+    padding: 5px; 
+    width: 25%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 25%;
+}
+
+.back-btn:hover {
+    background-color: #e0e0e0; 
+}
+
+.logo {
+    display: flex; 
+    justify-content: center;
+    padding-right: 10%;
+    width: 200px; 
+}
+
+.logo img {
+    width: 250px; 
+    height: 250px; 
+}
