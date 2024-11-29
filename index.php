@@ -65,6 +65,7 @@ include 'includes/header.php';
                 <th>Book ID</th>
                 <th>Title</th>
                 <th>Author</th>
+                <th>Donated By</th>
                 <th>Status</th>
             </thead>
             <tbody>
@@ -72,7 +73,7 @@ include 'includes/header.php';
                     $sql = "SELECT * FROM books $where";
                     if ($stmt = $conn->prepare($sql)) {
                         if (!empty($where)) {
-                            $stmt->bind_param('i', $catid); // Bind the category ID as an integer
+                            $stmt->bind_param('i', $catid); 
                         }
 
                         $stmt->execute();
@@ -86,7 +87,9 @@ include 'includes/header.php';
                                     <td>" . $row['book_id'] . "</td>
                                     <td>" . $row['title'] . "</td>
                                     <td>" . $row['author'] . "</td>
+                                    <td>" . $row['donate'] . "</td>
                                     <td>" . $status . "</td>
+                                    
                                 </tr>
                             ";
                         }
@@ -115,5 +118,6 @@ include 'includes/header.php';
             });
         });
     </script>
+        <?php include 'includes/footer.php'; ?>
 </body>
 </html>

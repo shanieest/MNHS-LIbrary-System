@@ -59,8 +59,9 @@
 
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
+            <center>
               <b><p>Total Books</p></b>
+              </center>
             </div>
             <div class="icon">
               <i class="fa fa-"></i>
@@ -78,7 +79,7 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
           
-              <b><p>Total Users</p></b>
+              <center><b><p>Total Users</p></b></center>
             </div>
             <div class="icon">
               <i class="fa fa-"></i>
@@ -96,7 +97,7 @@
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
              
-              <b><p>Returned Today</p></b>
+             <center> <b><p>Returned Today</p></b></center>
             </div>
             <div class="icon">
               <i class="fa fa-borrow"></i>
@@ -113,8 +114,8 @@
 
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
-              <b><p>Borrowed Today</p></b>
+            
+             <center><b><p>Borrowed Today</p></b></center> 
             </div>
             <div class="icon">
               <i class="fa fa-"></i>

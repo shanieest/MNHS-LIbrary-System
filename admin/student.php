@@ -111,7 +111,7 @@
         data: {id: id},
         dataType: 'json',
         success: function(response) {
-          $('.studid').val(response.studid);
+          $('.user_id').val(response.user_id);
           $('#edit_firstname').val(response.firstname);
           $('#edit_lastname').val(response.lastname);
           $('.del_stu').html(response.firstname + ' ' + response.lastname);

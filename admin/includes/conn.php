@@ -1,8 +1,14 @@
 <?php
-	$conn = new mysqli('localhost', 'root', '', 'library_management_system');
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "library_management_system";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 	if ($conn->connect_error) {
 	    die("Connection failed: " . $conn->connect_error);
 	}
+
 	
 ?>

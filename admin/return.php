@@ -67,7 +67,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, users.user_id AS users FROM returns LEFT JOIN users ON users.user_id=returns.book_id LEFT JOIN books ON books.id=returns.book_id ORDER BY date_return DESC";
+                    $sql = "SELECT *, users.user_id AS users FROM returns LEFT JOIN users ON users.id=returns.user_id LEFT JOIN books ON books.id=returns.book_id ORDER BY date_return DESC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       if($row['status']){

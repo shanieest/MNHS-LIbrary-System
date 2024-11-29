@@ -64,6 +64,7 @@
                   <th>Name</th>
                   <th>Book ID</th>
                   <th>Title</th>
+                  
                   <th>Status</th>
                 </thead>
                 <tbody>

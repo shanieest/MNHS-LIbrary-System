@@ -1,4 +1,5 @@
-<?php include 'includes/session.php'; ?>
+<?php include 'includes/session.php'; 
+?>
 <?php
   $catid = 0;
   $where = '';
@@ -96,7 +97,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, books.book_id AS book_id FROM books LEFT JOIN category ON category.id=books.category_id $where";
+                    $sql = "SELECT *, books.id AS book FROM books LEFT JOIN category ON category.id=books.category_id $where";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       if($row['status']){
@@ -106,19 +107,22 @@
                         $status = '<span class="label label-success">available</span>';
                       }
                       echo "
-                        <tr>
-                          <td>".$row['name']."</td>
-                          <td>".$row['book_id']."</td>
-                          <td>".$row['title']."</td>
-                          <td>".$row['author']."</td>
-                          <td>".$row['donate']."</td>
-                          <td>".$status."</td>
-                          <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['book_id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['book_id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
-                        </tr>
-                      ";
+                      <tr>
+                        <td>".$row['name']."</td>
+                        <td>".$row['book_id']."</td>
+                        <td>".$row['title']."</td>
+                        <td>".$row['author']."</td>
+                        <td>".$row['donate']."</td>
+                        <td>".$status."</td>
+                        <td>
+                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['book']."' id='editBtn'>
+                            <i class='fa fa-edit'></i> Edit
+                          </button>
+                          <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['book']."'>
+                            <i class='fa fa-trash'></i> Delete
+                          </button>
+                        </td>
+                      </tr>";
                     }
                   ?>
                 </tbody>
@@ -129,52 +133,54 @@
       </div>
     </section>   
   </div>
+
+
     
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/book_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
-$(function(){
-  $('#select_category').change(function(){
-    var value = $(this).val();
-    if(value == 0){
-      window.location = 'book.php';
-    }
-    else{
-      window.location = 'book.php?category='+value;
-    }
-  });
-
-  $(document).on('click', '.edit', function(e){
+$(document).on('click', '.edit', function(e) {
     e.preventDefault();
     $('#edit').modal('show');
     var id = $(this).data('id');
+    console.log('Fetching book data for ID:', id); // Log the ID
     getRow(id);
-  });
-
-  $(document).on('click', '.edit', function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
 });
 
-function getRow(id){
+$(document).ready(function() {
+    $('.delete').click(function() {
+        var id = $(this).data('id');
+        $('#delete_id').val(id); // Set the hidden input's value
+        $('#delete').modal('show'); // Show the modal
+    });
+});
+
+function getRow(id) {
   $.ajax({
     type: 'POST',
     url: 'book_row.php',
-    data: {id:id},
+    data: { id: id },
     dataType: 'json',
-    success: function(response){
-      $('.bookid').val(response.bookid);
-      $('#edit_book_id').val(response.book_id);
-      $('#edit_title').val(response.title);
-      $('#catselect').val(response.category_id).html(response.name);
-      $('#edit_author').val(response.author);
-      $('#edit_donate').val(response.donate);
-      $('#del_book').html(response.title);
+    success: function(response) {
+      if (response && response.id) {
+        // Log the response for debugging
+        console.log(response); // Check the response in the browser console
+
+        // Fill in the modal fields with the response data
+        $('#id').val(response.id);  // Make sure 'id' is populated here
+        $('#edit_isbn').val(response.book_id);
+        $('#edit_title').val(response.title);
+        $('#category').val(response.category_id).change();
+        $('#edit_author').val(response.author);
+        $('#edit_donate').val(response.donate);
+      } else {
+        console.error("No data received or invalid response.");
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error("AJAX request failed: " + status + ", " + error);
     }
   });
 }

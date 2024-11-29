@@ -15,14 +15,6 @@
             <span class="hidden-xs"><?php echo htmlspecialchars($user['firstname'].' '.$user['lastname']); ?></span>
           </a>
           <ul class="dropdown-menu">
-            <li class="">
-              <p>
-                <?php echo htmlspecialchars($user['firstname'].' '.$user['lastname']); ?>
-                <small>
-                  <?php echo ($user['created_on']) ? 'Created on: '.date('M. Y', strtotime($user['created_on'])) : ''; ?>
-                </small>
-              </p>
-            </li>
             <li class="user-footer">
               <div class="pull-left">
                 <a href="#profile" data-toggle="modal" class="btn btn-default btn-flat" id="admin_profile">Update</a>

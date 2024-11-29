@@ -1,23 +1,23 @@
 <?php
-	include 'includes/session.php';
+include 'includes/session.php';
 
-	if(isset($_POST['edit'])){
-		$id = $_POST['id'];
-		$firstname = $_POST['firstname'];
-		$lastname = $_POST['lastname'];
+if (isset($_POST['edit'])) {
+    $id = $_POST['id'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
 
-		$sql = "UPDATE users SET firstname = '$firstname', lastname = '$lastname', WHERE id = '$id'";
-		if($conn->query($sql)){
-			$_SESSION['success'] = 'User updated successfully';
-		}
-		else{
-			$_SESSION['error'] = $conn->error;
-		}
-	}
-	else{
-		$_SESSION['error'] = 'Fill up edit form first';
-	}
+    $stmt = $conn->prepare("UPDATE users SET firstname = ?, lastname = ? WHERE user_id = ?");
+    $stmt->bind_param("ssi", $firstname, $lastname, $id); 
+    
+    if ($stmt->execute()) {
+        $_SESSION['success'] = 'User updated successfully';
+    } else {
+        $_SESSION['error'] = $stmt->error;
+    }
 
-	header('location:student.php');
+    $stmt->close();
+} else {
+    $_SESSION['error'] = 'Fill up edit form first';
+}
 
-?>
+header('location:student.php');
