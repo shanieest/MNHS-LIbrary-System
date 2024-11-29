@@ -33,7 +33,7 @@
 							$sql = "INSERT INTO returns (user_id, book_id, date_return) VALUES ('$user_id', '$book_id', NOW())";
 							if($conn->query($sql)){
 								$return++;
-								$sql = "UPDATE books SET status = 0 WHERE id = '$bid'";
+								$sql = "UPDATE books SET status = 0 WHERE id = '$book_id'";
 								$conn->query($sql);
 								$sql = "UPDATE borrow SET status = 1 WHERE id = '$borrow_id'";
 								$conn->query($sql);
